@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CosCumparaturi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+325e60b507239b57d29e5bbdc808c984a8ed8e5f")]
 [assembly: System.Reflection.AssemblyProductAttribute("CosCumparaturi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CosCumparaturi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
