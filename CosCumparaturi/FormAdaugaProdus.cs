@@ -73,10 +73,5 @@ namespace CosCumparaturi
                 this.Close();
             }
         }
-
-        private void menuItemAdaugaProdus_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

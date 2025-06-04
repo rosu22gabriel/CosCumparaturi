@@ -9,7 +9,12 @@ namespace CosCumparaturi
 {
     public class Cos
     {
-        private List<Produs> produse = [];
+        private BindingList<Produs> produse = new();
+
+        public IList<Produs> GetProduse()
+        { 
+            return produse; 
+        }
 
         public int NumarProduse => produse.Count;
 
@@ -32,7 +37,21 @@ namespace CosCumparaturi
 
         public void AdaugaProdus(Produs produs)
         {
-            produse.Add(produs);
+            var produsExistent = produse.FirstOrDefault(p => p.Cod == produs.Cod);
+
+            if (produsExistent != null)
+            {
+                produsExistent.Cantitate += produs.Cantitate;
+                ModificareProdus?.Invoke(this, produsExistent);
+            }
+            else
+            {
+                produse.Add(produs);
+                AdaugareProdus?.Invoke(this, produs);
+            }
+
+
+                produse.Add(produs);
             produs.PropertyChanged += Produs_PropertyChanged;
             AdaugareProdus?.Invoke(this, produs);
         }
@@ -46,12 +65,6 @@ namespace CosCumparaturi
             }
 
         }
-
-        public IList<Produs> GetProduse()
-        {
-            return produse;
-        }
-
 
         private void Produs_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {

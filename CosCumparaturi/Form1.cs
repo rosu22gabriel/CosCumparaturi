@@ -2,13 +2,14 @@
 {
     public partial class Form1 : Form
     {
-        private Cos cos;
+        private readonly Cos cos;
         public Form1(Cos cos)
         {
             InitializeComponent();
             this.cos = cos;
             dataGridViewProduse.DataSource = new BindingSource { DataSource = cos.GetProduse() };
             dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProduse.AllowUserToAddRows = false;
 
             cos.AdaugareProdus += OnCosModificat;
             cos.StergereProdus += OnCosModificat;
@@ -37,7 +38,14 @@
 
             formAdaugare.ProdusAdaugat += (s, args) =>
             {
-                cos.AdaugaProdus(args.Produs);
+                try
+                {
+                    cos.AdaugaProdus(args.Produs);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Eroare in handler: " + ex.Message);
+                }
             };
 
             formAdaugare.ShowDialog();
