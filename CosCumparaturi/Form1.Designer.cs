@@ -1,0 +1,101 @@
+﻿namespace CosCumparaturi
+{
+    partial class Form1
+    {
+        /// <summary>
+        ///  Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        ///  Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        ///  Required method for Designer support - do not modify
+        ///  the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            dataGridViewProduse = new DataGridView();
+            statusStrip1 = new StatusStrip();
+            toolStripStatusLabel2 = new ToolStripStatusLabel();
+            statusLabelNumar = new ToolStripStatusLabel();
+            statusLabelValoare = new ToolStripStatusLabel();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
+            statusStrip1.SuspendLayout();
+            SuspendLayout();
+            // 
+            // dataGridViewProduse
+            // 
+            dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProduse.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProduse.Dock = DockStyle.Top;
+            dataGridViewProduse.Location = new Point(0, 0);
+            dataGridViewProduse.Name = "dataGridViewProduse";
+            dataGridViewProduse.Size = new Size(800, 150);
+            dataGridViewProduse.TabIndex = 0;
+            // 
+            // statusStrip1
+            // 
+            statusStrip1.Items.AddRange(new ToolStripItem[] { toolStripStatusLabel2, statusLabelNumar, statusLabelValoare });
+            statusStrip1.Location = new Point(0, 428);
+            statusStrip1.Name = "statusStrip1";
+            statusStrip1.Size = new Size(800, 22);
+            statusStrip1.TabIndex = 1;
+            statusStrip1.Text = "statusStrip1";
+            // 
+            // toolStripStatusLabel2
+            // 
+            toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            toolStripStatusLabel2.Size = new Size(0, 17);
+            // 
+            // statusLabelNumar
+            // 
+            statusLabelNumar.Name = "statusLabelNumar";
+            statusLabelNumar.Size = new Size(102, 17);
+            statusLabelNumar.Text = "Număr produse: 0";
+            statusLabelNumar.Click += toolStripStatusLabel1_Click;
+            // 
+            // statusLabelValoare
+            // 
+            statusLabelValoare.Name = "statusLabelValoare";
+            statusLabelValoare.Size = new Size(133, 17);
+            statusLabelValoare.Text = "Valoare totală: 0.00 RON";
+            // 
+            // Form1
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(statusStrip1);
+            Controls.Add(dataGridViewProduse);
+            Name = "Form1";
+            Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
+            statusStrip1.ResumeLayout(false);
+            statusStrip1.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
+        }
+
+        #endregion
+
+        private DataGridView dataGridViewProduse;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel toolStripStatusLabel2;
+        private ToolStripStatusLabel statusLabelNumar;
+        private ToolStripStatusLabel statusLabelValoare;
+    }
+}

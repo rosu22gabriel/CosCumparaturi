@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CosCumparaturi
 {
-    public class CosCumparaturi
+    public class Cos
     {
         private List<Produs> produse = [];
 
@@ -45,6 +45,11 @@ namespace CosCumparaturi
                 StergereProdus?.Invoke(this, produs);
             }
 
+        }
+
+        public IList<Produs> GetProduse()
+        {
+            return produse;
         }
 
 
