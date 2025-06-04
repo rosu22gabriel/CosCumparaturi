@@ -33,6 +33,7 @@
             toolStripStatusLabel2 = new ToolStripStatusLabel();
             statusLabelNumar = new ToolStripStatusLabel();
             statusLabelValoare = new ToolStripStatusLabel();
+            menuItemAdaugProdus_Click = new MenuStrip();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
             statusStrip1.SuspendLayout();
             SuspendLayout();
@@ -74,13 +75,24 @@
             statusLabelValoare.Size = new Size(133, 17);
             statusLabelValoare.Text = "Valoare totală: 0.00 RON";
             // 
+            // menuItemAdaugProdus_Click
+            // 
+            menuItemAdaugProdus_Click.Location = new Point(0, 150);
+            menuItemAdaugProdus_Click.Name = "menuItemAdaugProdus_Click";
+            menuItemAdaugProdus_Click.Size = new Size(800, 24);
+            menuItemAdaugProdus_Click.TabIndex = 2;
+            menuItemAdaugProdus_Click.Text = "menuStrip1";
+            menuItemAdaugProdus_Click.Click += MenuItemAdaugaProdus_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(statusStrip1);
+            Controls.Add(menuItemAdaugProdus_Click);
             Controls.Add(dataGridViewProduse);
+            MainMenuStrip = menuItemAdaugProdus_Click;
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
@@ -97,5 +109,6 @@
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel statusLabelNumar;
         private ToolStripStatusLabel statusLabelValoare;
+        private MenuStrip menuItemAdaugProdus_Click;
     }
 }

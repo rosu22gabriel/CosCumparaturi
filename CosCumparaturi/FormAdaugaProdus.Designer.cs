@@ -62,7 +62,7 @@ namespace CosCumparaturi
             buttonAdauga.TabIndex = 2;
             buttonAdauga.Text = "Adaugă în coș";
             buttonAdauga.UseVisualStyleBackColor = true;
-            buttonAdauga.Click += this.button1_Click;
+            buttonAdauga.Click += buttonAdauga_Click;
             // 
             // FormAdaugaProdus
             // 

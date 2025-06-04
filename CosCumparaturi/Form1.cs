@@ -30,6 +30,18 @@
             statusLabelValoare.Text = $"Valoare totală: {cos.ValoareTotala:0.00} RON";
         }
 
+
+        private void MenuItemAdaugaProdus_Click(object sender, EventArgs e)
+        {
+            var formAdaugare = new FormAdaugaProdus();
+
+            formAdaugare.ProdusAdaugat += (s, args) =>
+            {
+                cos.AdaugaProdus(args.Produs);
+            };
+
+            formAdaugare.ShowDialog();
+        }
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
