@@ -1,11 +1,8 @@
 bin/
 obj/
 
-
+.vs
 .vs/
-*.user
-*.suo
-
 
 *.log
 

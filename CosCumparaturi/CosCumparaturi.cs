@@ -46,14 +46,10 @@ namespace CosCumparaturi
             }
             else
             {
+                produs.PropertyChanged += Produs_PropertyChanged;
                 produse.Add(produs);
                 AdaugareProdus?.Invoke(this, produs);
             }
-
-
-                produse.Add(produs);
-            produs.PropertyChanged += Produs_PropertyChanged;
-            AdaugareProdus?.Invoke(this, produs);
         }
 
         public void StergeProdus(Produs produs)
@@ -72,7 +68,6 @@ namespace CosCumparaturi
             {
                 ModificareProdus?.Invoke(this, produs);
             }
-
         }
 
         public event EventHandler<Produs>? AdaugareProdus;
