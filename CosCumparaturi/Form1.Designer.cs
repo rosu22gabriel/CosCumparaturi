@@ -28,20 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             dataGridViewProduse = new DataGridView();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
             statusLabelNumar = new ToolStripStatusLabel();
             statusLabelValoare = new ToolStripStatusLabel();
             menuItemAdaugProdus_Click = new MenuStrip();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            stergeProdusToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
             statusStrip1.SuspendLayout();
+            contextMenuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridViewProduse
             // 
             dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProduse.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProduse.ContextMenuStrip = contextMenuStrip1;
             dataGridViewProduse.Dock = DockStyle.Top;
             dataGridViewProduse.Location = new Point(0, 0);
             dataGridViewProduse.Name = "dataGridViewProduse";
@@ -84,6 +89,19 @@
             menuItemAdaugProdus_Click.Text = "menuStrip1";
             menuItemAdaugProdus_Click.Click += MenuItemAdaugaProdus_Click;
             // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { stergeProdusToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(181, 48);
+            // 
+            // stergeProdusToolStripMenuItem
+            // 
+            stergeProdusToolStripMenuItem.Name = "stergeProdusToolStripMenuItem";
+            stergeProdusToolStripMenuItem.Size = new Size(180, 22);
+            stergeProdusToolStripMenuItem.Text = "Șterge produsul";
+            stergeProdusToolStripMenuItem.Click += stergeProdusToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -98,6 +116,7 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
+            contextMenuStrip1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -110,5 +129,7 @@
         private ToolStripStatusLabel statusLabelNumar;
         private ToolStripStatusLabel statusLabelValoare;
         private MenuStrip menuItemAdaugProdus_Click;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem stergeProdusToolStripMenuItem;
     }
 }

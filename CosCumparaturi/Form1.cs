@@ -7,9 +7,12 @@
         {
             InitializeComponent();
             this.cos = cos;
+            this.KeyPreview = true;
             dataGridViewProduse.DataSource = new BindingSource { DataSource = cos.GetProduse() };
             dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProduse.AllowUserToAddRows = false;
+
+            Produs? produsSelectat = dataGridViewProduse.CurrentRow?.DataBoundItem as Produs;
 
             cos.AdaugareProdus += OnCosModificat;
             cos.StergereProdus += OnCosModificat;
@@ -53,6 +56,29 @@
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void stergeProdusToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Produs? produsSelectat = dataGridViewProduse.CurrentRow?.DataBoundItem as Produs;
+            if (produsSelectat != null)
+            {
+                cos.StergeProdus(produsSelectat);
+            }
+        }
+
+        private void stergeProdusToolStripMenuItem_KeyDown(object sender,  KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                Produs? produsSelectat = dataGridViewProduse.CurrentRow?.DataBoundItem as Produs;
+
+                if (produsSelectat != null)
+                {
+                    cos.StergeProdus(produsSelectat);
+                }
+                e.Handled = true;
+            }
         }
     }
 }

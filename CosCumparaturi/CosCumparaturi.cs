@@ -9,7 +9,7 @@ namespace CosCumparaturi
 {
     public class Cos
     {
-        private BindingList<Produs> produse = new();
+        private BindingList<Produs> produse = [];
 
         public IList<Produs> GetProduse()
         { 
