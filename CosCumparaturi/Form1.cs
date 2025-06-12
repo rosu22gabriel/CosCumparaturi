@@ -7,7 +7,6 @@ namespace CosCumparaturi
         private readonly Cos cos;
         private CosContext? db;
 
-
         public Form1(Cos cos)
         {
             InitializeComponent();
@@ -29,6 +28,8 @@ namespace CosCumparaturi
             cos.AdaugareProdus += OnCosModificat;
             cos.StergereProdus += OnCosModificat;
             cos.ModificareProdus += OnCosModificat;
+
+            cos.ModificareProdus += (s, e) => DeseneazaGrafic();
 
             RefreshStatusBar();
         }
@@ -138,7 +139,7 @@ namespace CosCumparaturi
 
         private void fisierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void exportaCosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -211,7 +212,7 @@ namespace CosCumparaturi
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Eroare la import: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error); 
+                    MessageBox.Show("Eroare la import: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -236,12 +237,12 @@ namespace CosCumparaturi
             using Brush umplere = new SolidBrush(Color.SkyBlue);
             using Font font = new Font("Arial", 8);
 
-            foreach(var produs in produse)
+            foreach (var produs in produse)
             {
                 decimal valoare = produs.Cantitate * produs.Pret;
                 int inaltime = (int)((valoare / valoareMax) * (hPanel - 40));
 
-                g.FillRectangle(umplere, x, hPanel - inaltime  - 20, latimeBara, inaltime);
+                g.FillRectangle(umplere, x, hPanel - inaltime - 20, latimeBara, inaltime);
                 g.DrawRectangle(contur, x, hPanel - inaltime - 20, latimeBara, inaltime);
 
                 g.DrawString(produs.Denumire, font, Brushes.Black, x, hPanel - 15);
@@ -249,5 +250,12 @@ namespace CosCumparaturi
                 x += latimeBara + spatiu;
             }
         }
+
+        private void panelGrafic_Paint(object sender, PaintEventArgs e)
+        {
+            DeseneazaGrafic();
+        }
+        
+        
     }
 }

@@ -134,14 +134,14 @@
             // exportaCosToolStripMenuItem
             // 
             exportaCosToolStripMenuItem.Name = "exportaCosToolStripMenuItem";
-            exportaCosToolStripMenuItem.Size = new Size(180, 22);
+            exportaCosToolStripMenuItem.Size = new Size(156, 22);
             exportaCosToolStripMenuItem.Text = "Exportă coșul...";
             exportaCosToolStripMenuItem.Click += exportaCosToolStripMenuItem_Click;
             // 
             // importaCoslToolStripMenuItem
             // 
             importaCoslToolStripMenuItem.Name = "importaCoslToolStripMenuItem";
-            importaCoslToolStripMenuItem.Size = new Size(180, 22);
+            importaCoslToolStripMenuItem.Size = new Size(156, 22);
             importaCoslToolStripMenuItem.Text = "Importă coșul...";
             importaCoslToolStripMenuItem.Click += importaCosToolStripMenuItem_Click;
             // 
@@ -180,6 +180,7 @@
             panelGrafic.Name = "panelGrafic";
             panelGrafic.Size = new Size(530, 404);
             panelGrafic.TabIndex = 0;
+            panelGrafic.Paint += panelGrafic_Paint;
             // 
             // Form1
             // 
