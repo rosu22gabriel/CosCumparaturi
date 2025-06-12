@@ -8,6 +8,9 @@
             InitializeComponent();
             this.cos = cos;
             this.KeyPreview = true;
+
+            dataGridViewProduse.KeyDown += DataGridViewProduse_KeyDown;
+
             dataGridViewProduse.DataSource = new BindingSource { DataSource = cos.GetProduse() };
             dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProduse.AllowUserToAddRows = false;
@@ -67,17 +70,16 @@
             }
         }
 
-        private void stergeProdusToolStripMenuItem_KeyDown(object sender,  KeyEventArgs e)
+        private void DataGridViewProduse_KeyDown(object sender,  KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
                 Produs? produsSelectat = dataGridViewProduse.CurrentRow?.DataBoundItem as Produs;
-
                 if (produsSelectat != null)
                 {
                     cos.StergeProdus(produsSelectat);
+                    e.Handled = true;
                 }
-                e.Handled = true;
             }
         }
     }
