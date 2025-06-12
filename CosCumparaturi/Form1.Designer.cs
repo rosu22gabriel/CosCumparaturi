@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataGridViewProduse = new DataGridView();
             contextMenuStrip1 = new ContextMenuStrip(components);
             stergeProdusToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
@@ -42,23 +41,19 @@
             fisierToolStripMenuItem = new ToolStripMenuItem();
             exportaCosToolStripMenuItem = new ToolStripMenuItem();
             importaCoslToolStripMenuItem = new ToolStripMenuItem();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
+            splitContainer1 = new SplitContainer();
+            dataGridViewProduse = new DataGridView();
+            panelGrafic = new Panel();
             contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             menuItemAdaugProdus_Click.SuspendLayout();
             menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
+            splitContainer1.Panel1.SuspendLayout();
+            splitContainer1.Panel2.SuspendLayout();
+            splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
             SuspendLayout();
-            // 
-            // dataGridViewProduse
-            // 
-            dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewProduse.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewProduse.ContextMenuStrip = contextMenuStrip1;
-            dataGridViewProduse.Dock = DockStyle.Top;
-            dataGridViewProduse.Location = new Point(0, 0);
-            dataGridViewProduse.Name = "dataGridViewProduse";
-            dataGridViewProduse.Size = new Size(800, 150);
-            dataGridViewProduse.TabIndex = 0;
             // 
             // contextMenuStrip1
             // 
@@ -122,7 +117,7 @@
             // menuStrip1
             // 
             menuStrip1.Items.AddRange(new ToolStripItem[] { fisierToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 150);
+            menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 24);
             menuStrip1.TabIndex = 3;
@@ -150,20 +145,55 @@
             importaCoslToolStripMenuItem.Text = "Importă coșul...";
             importaCoslToolStripMenuItem.Click += importaCosToolStripMenuItem_Click;
             // 
+            // splitContainer1
+            // 
+            splitContainer1.Dock = DockStyle.Fill;
+            splitContainer1.Location = new Point(0, 24);
+            splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            splitContainer1.Panel1.Controls.Add(dataGridViewProduse);
+            // 
+            // splitContainer1.Panel2
+            // 
+            splitContainer1.Panel2.Controls.Add(panelGrafic);
+            splitContainer1.Size = new Size(800, 404);
+            splitContainer1.SplitterDistance = 266;
+            splitContainer1.TabIndex = 4;
+            // 
+            // dataGridViewProduse
+            // 
+            dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewProduse.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewProduse.ContextMenuStrip = contextMenuStrip1;
+            dataGridViewProduse.Dock = DockStyle.Top;
+            dataGridViewProduse.Location = new Point(0, 0);
+            dataGridViewProduse.Name = "dataGridViewProduse";
+            dataGridViewProduse.Size = new Size(266, 404);
+            dataGridViewProduse.TabIndex = 1;
+            // 
+            // panelGrafic
+            // 
+            panelGrafic.Dock = DockStyle.Fill;
+            panelGrafic.Location = new Point(0, 0);
+            panelGrafic.Name = "panelGrafic";
+            panelGrafic.Size = new Size(530, 404);
+            panelGrafic.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
             Controls.Add(menuItemAdaugProdus_Click);
             Controls.Add(menuStrip1);
-            Controls.Add(dataGridViewProduse);
             MainMenuStrip = menuItemAdaugProdus_Click;
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
             contextMenuStrip1.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
@@ -171,13 +201,16 @@
             menuItemAdaugProdus_Click.PerformLayout();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
+            splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
+            splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private DataGridView dataGridViewProduse;
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel2;
         private ToolStripStatusLabel statusLabelNumar;
@@ -190,5 +223,8 @@
         private ToolStripMenuItem adauToolStripMenuItem;
         private ToolStripMenuItem exportaCosToolStripMenuItem;
         private ToolStripMenuItem importaCoslToolStripMenuItem;
+        private SplitContainer splitContainer1;
+        private DataGridView dataGridViewProduse;
+        private Panel panelGrafic;
     }
 }

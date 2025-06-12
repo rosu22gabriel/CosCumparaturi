@@ -157,7 +157,7 @@ namespace CosCumparaturi
 
                     foreach (var produs in cos.Produse)
                     {
-                        writer.WriteLine($"{produs.Cod}, {produs.Denumire}, {produs.Pret},{produs.Cantitate}");
+                        writer.WriteLine($"{produs.Cod}, {produs.Denumire}, {produs.Pret}, {produs.Cantitate}");
                     }
 
                     MessageBox.Show("Export realizat cu suscces", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -213,6 +213,40 @@ namespace CosCumparaturi
                 {
                     MessageBox.Show("Eroare la import: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
+            }
+        }
+
+
+        private void DeseneazaGrafic()
+        {
+            var produse = cos.Produse;
+            if (produse.Count == 0) return;
+
+            panelGrafic.Refresh();
+
+            Graphics g = panelGrafic.CreateGraphics();
+            int latimeBara = 40;
+            int spatiu = 20;
+            int x = 10;
+
+            decimal valoareMax = produse.Max(p => p.Cantitate * p.Pret);
+            int hPanel = panelGrafic.Height;
+
+            using Pen contur = new Pen(Color.Black);
+            using Brush umplere = new SolidBrush(Color.SkyBlue);
+            using Font font = new Font("Arial", 8);
+
+            foreach(var produs in produse)
+            {
+                decimal valoare = produs.Cantitate * produs.Pret;
+                int inaltime = (int)((valoare / valoareMax) * (hPanel - 40));
+
+                g.FillRectangle(umplere, x, hPanel - inaltime  - 20, latimeBara, inaltime);
+                g.DrawRectangle(contur, x, hPanel - inaltime - 20, latimeBara, inaltime);
+
+                g.DrawString(produs.Denumire, font, Brushes.Black, x, hPanel - 15);
+
+                x += latimeBara + spatiu;
             }
         }
     }
