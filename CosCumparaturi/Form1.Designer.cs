@@ -30,16 +30,23 @@
         {
             components = new System.ComponentModel.Container();
             dataGridViewProduse = new DataGridView();
+            contextMenuStrip1 = new ContextMenuStrip(components);
+            stergeProdusToolStripMenuItem = new ToolStripMenuItem();
             statusStrip1 = new StatusStrip();
             toolStripStatusLabel2 = new ToolStripStatusLabel();
             statusLabelNumar = new ToolStripStatusLabel();
             statusLabelValoare = new ToolStripStatusLabel();
             menuItemAdaugProdus_Click = new MenuStrip();
-            contextMenuStrip1 = new ContextMenuStrip(components);
-            stergeProdusToolStripMenuItem = new ToolStripMenuItem();
+            adauToolStripMenuItem = new ToolStripMenuItem();
+            menuStrip1 = new MenuStrip();
+            fisierToolStripMenuItem = new ToolStripMenuItem();
+            exportaCosToolStripMenuItem = new ToolStripMenuItem();
+            importaCoslToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).BeginInit();
-            statusStrip1.SuspendLayout();
             contextMenuStrip1.SuspendLayout();
+            statusStrip1.SuspendLayout();
+            menuItemAdaugProdus_Click.SuspendLayout();
+            menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // dataGridViewProduse
@@ -52,6 +59,19 @@
             dataGridViewProduse.Name = "dataGridViewProduse";
             dataGridViewProduse.Size = new Size(800, 150);
             dataGridViewProduse.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { stergeProdusToolStripMenuItem });
+            contextMenuStrip1.Name = "contextMenuStrip1";
+            contextMenuStrip1.Size = new Size(158, 26);
+            // 
+            // stergeProdusToolStripMenuItem
+            // 
+            stergeProdusToolStripMenuItem.Name = "stergeProdusToolStripMenuItem";
+            stergeProdusToolStripMenuItem.Size = new Size(157, 22);
+            stergeProdusToolStripMenuItem.Text = "Șterge produsul";
+            stergeProdusToolStripMenuItem.Click += stergeProdusToolStripMenuItem_Click;
             // 
             // statusStrip1
             // 
@@ -82,25 +102,53 @@
             // 
             // menuItemAdaugProdus_Click
             // 
-            menuItemAdaugProdus_Click.Location = new Point(0, 150);
+            menuItemAdaugProdus_Click.Anchor = AnchorStyles.None;
+            menuItemAdaugProdus_Click.Dock = DockStyle.None;
+            menuItemAdaugProdus_Click.Items.AddRange(new ToolStripItem[] { adauToolStripMenuItem });
+            menuItemAdaugProdus_Click.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            menuItemAdaugProdus_Click.Location = new Point(0, 258);
             menuItemAdaugProdus_Click.Name = "menuItemAdaugProdus_Click";
-            menuItemAdaugProdus_Click.Size = new Size(800, 24);
+            menuItemAdaugProdus_Click.Size = new Size(108, 24);
             menuItemAdaugProdus_Click.TabIndex = 2;
             menuItemAdaugProdus_Click.Text = "menuStrip1";
             menuItemAdaugProdus_Click.Click += MenuItemAdaugaProdus_Click;
             // 
-            // contextMenuStrip1
+            // adauToolStripMenuItem
             // 
-            contextMenuStrip1.Items.AddRange(new ToolStripItem[] { stergeProdusToolStripMenuItem });
-            contextMenuStrip1.Name = "contextMenuStrip1";
-            contextMenuStrip1.Size = new Size(181, 48);
+            adauToolStripMenuItem.Name = "adauToolStripMenuItem";
+            adauToolStripMenuItem.Size = new Size(100, 20);
+            adauToolStripMenuItem.Text = "Adaugă produs";
             // 
-            // stergeProdusToolStripMenuItem
+            // menuStrip1
             // 
-            stergeProdusToolStripMenuItem.Name = "stergeProdusToolStripMenuItem";
-            stergeProdusToolStripMenuItem.Size = new Size(180, 22);
-            stergeProdusToolStripMenuItem.Text = "Șterge produsul";
-            stergeProdusToolStripMenuItem.Click += stergeProdusToolStripMenuItem_Click;
+            menuStrip1.Items.AddRange(new ToolStripItem[] { fisierToolStripMenuItem });
+            menuStrip1.Location = new Point(0, 150);
+            menuStrip1.Name = "menuStrip1";
+            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.TabIndex = 3;
+            menuStrip1.Text = "menuStrip1";
+            // 
+            // fisierToolStripMenuItem
+            // 
+            fisierToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportaCosToolStripMenuItem, importaCoslToolStripMenuItem });
+            fisierToolStripMenuItem.Name = "fisierToolStripMenuItem";
+            fisierToolStripMenuItem.Size = new Size(46, 20);
+            fisierToolStripMenuItem.Text = "Fișier";
+            fisierToolStripMenuItem.Click += fisierToolStripMenuItem_Click;
+            // 
+            // exportaCosToolStripMenuItem
+            // 
+            exportaCosToolStripMenuItem.Name = "exportaCosToolStripMenuItem";
+            exportaCosToolStripMenuItem.Size = new Size(180, 22);
+            exportaCosToolStripMenuItem.Text = "Exportă coșul...";
+            exportaCosToolStripMenuItem.Click += exportaCosToolStripMenuItem_Click;
+            // 
+            // importaCoslToolStripMenuItem
+            // 
+            importaCoslToolStripMenuItem.Name = "importaCoslToolStripMenuItem";
+            importaCoslToolStripMenuItem.Size = new Size(180, 22);
+            importaCoslToolStripMenuItem.Text = "Importă coșul...";
+            importaCoslToolStripMenuItem.Click += importaCosToolStripMenuItem_Click;
             // 
             // Form1
             // 
@@ -109,14 +157,20 @@
             ClientSize = new Size(800, 450);
             Controls.Add(statusStrip1);
             Controls.Add(menuItemAdaugProdus_Click);
+            Controls.Add(menuStrip1);
             Controls.Add(dataGridViewProduse);
             MainMenuStrip = menuItemAdaugProdus_Click;
             Name = "Form1";
             Text = "Form1";
+            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewProduse).EndInit();
+            contextMenuStrip1.ResumeLayout(false);
             statusStrip1.ResumeLayout(false);
             statusStrip1.PerformLayout();
-            contextMenuStrip1.ResumeLayout(false);
+            menuItemAdaugProdus_Click.ResumeLayout(false);
+            menuItemAdaugProdus_Click.PerformLayout();
+            menuStrip1.ResumeLayout(false);
+            menuStrip1.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -131,5 +185,10 @@
         private MenuStrip menuItemAdaugProdus_Click;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem stergeProdusToolStripMenuItem;
+        private MenuStrip menuStrip1;
+        private ToolStripMenuItem fisierToolStripMenuItem;
+        private ToolStripMenuItem adauToolStripMenuItem;
+        private ToolStripMenuItem exportaCosToolStripMenuItem;
+        private ToolStripMenuItem importaCoslToolStripMenuItem;
     }
 }

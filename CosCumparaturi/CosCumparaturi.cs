@@ -11,10 +11,7 @@ namespace CosCumparaturi
     {
         private BindingList<Produs> produse = [];
 
-        public IList<Produs> GetProduse()
-        { 
-            return produse; 
-        }
+        public BindingList<Produs> Produse => produse;
 
         public int NumarProduse => produse.Count;
 

@@ -22,7 +22,7 @@ namespace CosCumparaturi
                 new ProdusDisponibil { Cod = 1, Denumire = "Lapte", Pret = 5.5m},
                 new ProdusDisponibil { Cod = 2, Denumire = "Paine", Pret = 2.2m},
                 new ProdusDisponibil { Cod = 3, Denumire = "Oua", Pret = 12.0m},
-                new ProdusDisponibil { Cod = 2, Denumire = "Zahar", Pret = 4.0m},
+                new ProdusDisponibil { Cod = 4, Denumire = "Zahar", Pret = 4.0m},
             };
 
             comboBoxProduse.DataSource = produse;

@@ -1,17 +1,26 @@
-﻿namespace CosCumparaturi
+﻿using System.ComponentModel;
+
+namespace CosCumparaturi
 {
     public partial class Form1 : Form
     {
         private readonly Cos cos;
+        private CosContext? db;
+
+
         public Form1(Cos cos)
         {
             InitializeComponent();
             this.cos = cos;
             this.KeyPreview = true;
 
+            this.Load += Form1_Load;
+            this.FormClosing += Form1_FormClosing;
+
+
             dataGridViewProduse.KeyDown += DataGridViewProduse_KeyDown;
 
-            dataGridViewProduse.DataSource = new BindingSource { DataSource = cos.GetProduse() };
+            dataGridViewProduse.DataSource = new BindingSource { DataSource = cos.Produse };
             dataGridViewProduse.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewProduse.AllowUserToAddRows = false;
 
@@ -24,6 +33,10 @@
             RefreshStatusBar();
         }
 
+        public Form1() : this(new Cos())
+        {
+
+        }
 
         private void OnCosModificat(object? sender, Produs produs)
         {
@@ -70,7 +83,7 @@
             }
         }
 
-        private void DataGridViewProduse_KeyDown(object sender,  KeyEventArgs e)
+        private void DataGridViewProduse_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Delete)
             {
@@ -79,6 +92,126 @@
                 {
                     cos.StergeProdus(produsSelectat);
                     e.Handled = true;
+                }
+            }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            db = new CosContext();
+            db.Database.EnsureCreated();
+
+            var produseInDB = db.Produse.ToList();
+            foreach (var produs in produseInDB)
+            {
+                cos.AdaugaProdus(produs);
+            }
+
+            dataGridViewProduse.DataSource = cos.Produse;
+        }
+
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (db == null) return;
+
+            try
+            {
+                db.Produse.RemoveRange(db.Produse);
+                db.SaveChanges();
+
+                foreach (var produs in cos.Produse)
+                {
+                    db.Produse.Add(produs);
+                }
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Eroare la salvarea in baza de date: " + ex.Message);
+            }
+            finally
+            {
+                db.Dispose();
+            }
+        }
+
+        private void fisierToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+        }
+
+        private void exportaCosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using SaveFileDialog sfd = new()
+            {
+                Filter = "Fișiere text (*.txt)|*.txt",
+                Title = "Selectează locația pentru export"
+            };
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using StreamWriter writer = new StreamWriter(sfd.FileName);
+
+                    foreach (var produs in cos.Produse)
+                    {
+                        writer.WriteLine($"{produs.Cod}, {produs.Denumire}, {produs.Pret},{produs.Cantitate}");
+                    }
+
+                    MessageBox.Show("Export realizat cu suscces", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Eroare la export: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void importaCosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using OpenFileDialog ofd = new()
+            {
+                Filter = "Fișiere text (*.txt)|*.txt",
+                Title = "Selectează locația pentru export"
+            };
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    using StreamReader reader = new StreamReader(ofd.FileName);
+                    string? line;
+                    int produseImportate = 0;
+
+                    cos.Produse.Clear();
+                    while ((line = reader.ReadLine()) != null)
+                    {
+                        var parts = line.Split(',');
+
+                        if (parts.Length == 4 &&
+                            int.TryParse(parts[0], out int cod) &&
+                            decimal.TryParse(parts[2], out decimal pret) &&
+                            int.TryParse(parts[3], out int cantitate))
+                        {
+                            var produs = new Produs
+                            {
+                                Cod = cod,
+                                Denumire = parts[1],
+                                Pret = pret,
+                                Cantitate = cantitate,
+                            };
+
+                            cos.AdaugaProdus(produs);
+                            produseImportate++;
+                        }
+                    }
+                    MessageBox.Show($"Import realizat cu succes: {produseImportate} produse adăugate.", "Succes", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Eroare la import: " + ex.Message, "Eroare", MessageBoxButtons.OK, MessageBoxIcon.Error); 
                 }
             }
         }
