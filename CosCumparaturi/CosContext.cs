@@ -15,5 +15,9 @@ namespace CosCumparaturi
         {
             optionsBuilder.UseSqlite("Data Source=cos.db");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Produs>().HasKey(p => p.Cod);
+        }
     }
 }

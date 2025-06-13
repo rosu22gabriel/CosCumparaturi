@@ -1,4 +1,5 @@
-﻿namespace CosCumparaturi
+﻿
+namespace CosCumparaturi
 {
     partial class Form1
     {
@@ -44,6 +45,7 @@
             splitContainer1 = new SplitContainer();
             dataGridViewProduse = new DataGridView();
             panelGrafic = new Panel();
+            tiparesteCosToolStripMenuItem = new ToolStripMenuItem();
             contextMenuStrip1.SuspendLayout();
             statusStrip1.SuspendLayout();
             menuItemAdaugProdus_Click.SuspendLayout();
@@ -97,11 +99,10 @@
             // 
             // menuItemAdaugProdus_Click
             // 
-            menuItemAdaugProdus_Click.Anchor = AnchorStyles.None;
             menuItemAdaugProdus_Click.Dock = DockStyle.None;
             menuItemAdaugProdus_Click.Items.AddRange(new ToolStripItem[] { adauToolStripMenuItem });
             menuItemAdaugProdus_Click.LayoutStyle = ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            menuItemAdaugProdus_Click.Location = new Point(0, 258);
+            menuItemAdaugProdus_Click.Location = new Point(0, 346);
             menuItemAdaugProdus_Click.Name = "menuItemAdaugProdus_Click";
             menuItemAdaugProdus_Click.Size = new Size(108, 24);
             menuItemAdaugProdus_Click.TabIndex = 2;
@@ -116,16 +117,18 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.Dock = DockStyle.None;
             menuStrip1.Items.AddRange(new ToolStripItem[] { fisierToolStripMenuItem });
-            menuStrip1.Location = new Point(0, 0);
+            menuStrip1.Location = new Point(0, 370);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(174, 24);
             menuStrip1.TabIndex = 3;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // fisierToolStripMenuItem
             // 
-            fisierToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportaCosToolStripMenuItem, importaCoslToolStripMenuItem });
+            fisierToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { exportaCosToolStripMenuItem, importaCoslToolStripMenuItem, tiparesteCosToolStripMenuItem });
             fisierToolStripMenuItem.Name = "fisierToolStripMenuItem";
             fisierToolStripMenuItem.Size = new Size(46, 20);
             fisierToolStripMenuItem.Text = "Fișier";
@@ -134,31 +137,33 @@
             // exportaCosToolStripMenuItem
             // 
             exportaCosToolStripMenuItem.Name = "exportaCosToolStripMenuItem";
-            exportaCosToolStripMenuItem.Size = new Size(156, 22);
+            exportaCosToolStripMenuItem.Size = new Size(180, 22);
             exportaCosToolStripMenuItem.Text = "Exportă coșul...";
             exportaCosToolStripMenuItem.Click += exportaCosToolStripMenuItem_Click;
             // 
             // importaCoslToolStripMenuItem
             // 
             importaCoslToolStripMenuItem.Name = "importaCoslToolStripMenuItem";
-            importaCoslToolStripMenuItem.Size = new Size(156, 22);
+            importaCoslToolStripMenuItem.Size = new Size(180, 22);
             importaCoslToolStripMenuItem.Text = "Importă coșul...";
             importaCoslToolStripMenuItem.Click += importaCosToolStripMenuItem_Click;
             // 
             // splitContainer1
             // 
-            splitContainer1.Dock = DockStyle.Fill;
-            splitContainer1.Location = new Point(0, 24);
+            splitContainer1.Dock = DockStyle.Top;
+            splitContainer1.Location = new Point(0, 0);
             splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
             splitContainer1.Panel1.Controls.Add(dataGridViewProduse);
+            splitContainer1.Panel1.Controls.Add(menuItemAdaugProdus_Click);
+            splitContainer1.Panel1.Controls.Add(menuStrip1);
             // 
             // splitContainer1.Panel2
             // 
             splitContainer1.Panel2.Controls.Add(panelGrafic);
-            splitContainer1.Size = new Size(800, 404);
+            splitContainer1.Size = new Size(800, 412);
             splitContainer1.SplitterDistance = 266;
             splitContainer1.TabIndex = 4;
             // 
@@ -170,7 +175,7 @@
             dataGridViewProduse.Dock = DockStyle.Top;
             dataGridViewProduse.Location = new Point(0, 0);
             dataGridViewProduse.Name = "dataGridViewProduse";
-            dataGridViewProduse.Size = new Size(266, 404);
+            dataGridViewProduse.Size = new Size(266, 343);
             dataGridViewProduse.TabIndex = 1;
             // 
             // panelGrafic
@@ -178,19 +183,24 @@
             panelGrafic.Dock = DockStyle.Fill;
             panelGrafic.Location = new Point(0, 0);
             panelGrafic.Name = "panelGrafic";
-            panelGrafic.Size = new Size(530, 404);
+            panelGrafic.Size = new Size(530, 412);
             panelGrafic.TabIndex = 0;
             panelGrafic.Paint += panelGrafic_Paint;
+            // 
+            // tiparesteCosToolStripMenuItem
+            // 
+            tiparesteCosToolStripMenuItem.Name = "tiparesteCosToolStripMenuItem";
+            tiparesteCosToolStripMenuItem.Size = new Size(180, 22);
+            tiparesteCosToolStripMenuItem.Text = "Tipărește coș";
+            tiparesteCosToolStripMenuItem.Click += tiparesteCosToolStripMenuItem_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(splitContainer1);
             Controls.Add(statusStrip1);
-            Controls.Add(menuItemAdaugProdus_Click);
-            Controls.Add(menuStrip1);
+            Controls.Add(splitContainer1);
             MainMenuStrip = menuItemAdaugProdus_Click;
             Name = "Form1";
             Text = "Form1";
@@ -203,6 +213,7 @@
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
@@ -211,11 +222,12 @@
             PerformLayout();
         }
 
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+        }
+
         #endregion
-        private StatusStrip statusStrip1;
         private ToolStripStatusLabel toolStripStatusLabel2;
-        private ToolStripStatusLabel statusLabelNumar;
-        private ToolStripStatusLabel statusLabelValoare;
         private MenuStrip menuItemAdaugProdus_Click;
         private ContextMenuStrip contextMenuStrip1;
         private ToolStripMenuItem stergeProdusToolStripMenuItem;
@@ -227,5 +239,9 @@
         private SplitContainer splitContainer1;
         private DataGridView dataGridViewProduse;
         private Panel panelGrafic;
+        private StatusStrip statusStrip1;
+        private ToolStripStatusLabel statusLabelNumar;
+        private ToolStripStatusLabel statusLabelValoare;
+        private ToolStripMenuItem tiparesteCosToolStripMenuItem;
     }
 }

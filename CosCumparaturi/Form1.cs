@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Drawing.Printing;
 
 namespace CosCumparaturi
 {
@@ -6,6 +7,8 @@ namespace CosCumparaturi
     {
         private readonly Cos cos;
         private CosContext? db;
+        private PrintDocument printDocument = new();
+        private string continutDePrintat = "";
 
         public Form1(Cos cos)
         {
@@ -102,6 +105,8 @@ namespace CosCumparaturi
             db = new CosContext();
             db.Database.EnsureCreated();
 
+            cos.Produse.Clear();
+
             var produseInDB = db.Produse.ToList();
             foreach (var produs in produseInDB)
             {
@@ -121,9 +126,15 @@ namespace CosCumparaturi
                 db.Produse.RemoveRange(db.Produse);
                 db.SaveChanges();
 
-                foreach (var produs in cos.Produse)
+                foreach (var p in cos.Produse)
                 {
-                    db.Produse.Add(produs);
+                    db.Produse.Add(new Produs
+                    {
+                        Cod = p.Cod,
+                        Denumire = p.Denumire,
+                        Pret = p.Pret,
+                        Cantitate = p.Cantitate,
+                    });
                 }
                 db.SaveChanges();
             }
@@ -186,7 +197,6 @@ namespace CosCumparaturi
                     string? line;
                     int produseImportate = 0;
 
-                    cos.Produse.Clear();
                     while ((line = reader.ReadLine()) != null)
                     {
                         var parts = line.Split(',');
@@ -196,15 +206,17 @@ namespace CosCumparaturi
                             decimal.TryParse(parts[2], out decimal pret) &&
                             int.TryParse(parts[3], out int cantitate))
                         {
-                            var produs = new Produs
+                            string denumire = parts[1];
+                            var produsExistent = cos.Produse.FirstOrDefault(p => p.Denumire == denumire);
+                            if (produsExistent != null)
                             {
-                                Cod = cod,
-                                Denumire = parts[1],
-                                Pret = pret,
-                                Cantitate = cantitate,
-                            };
-
-                            cos.AdaugaProdus(produs);
+                                produsExistent.Cantitate = cantitate;
+                                produsExistent.Pret = pret;
+                            }
+                            else
+                            {
+                                cos.AdaugaProdus(new Produs { Denumire = denumire, Cod = cod, Cantitate = cantitate, Pret = pret });
+                            }
                             produseImportate++;
                         }
                     }
@@ -255,7 +267,32 @@ namespace CosCumparaturi
         {
             DeseneazaGrafic();
         }
-        
-        
+        private void tiparesteCosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            continutDePrintat = "Cosul de cumparaturi: \n\n";
+            foreach (var produs in cos.Produse)
+            {
+                continutDePrintat += $"Cod: {produs.Cod} | Denumire: {produs.Denumire} | Cantitate: {produs.Cantitate} | Pret: {produs.Pret: 0.00} RON\n";
+            }
+
+            PrintDialog dlg = new PrintDialog();
+            dlg.Document = printDocument;
+            printDocument.PrintPage += PrintDocument_PrintPage;
+
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                printDocument.Print();
+            }
+
+            printDocument.PrintPage -= PrintDocument_PrintPage;
+        }
+
+        private void PrintDocument_PrintPage(object sender, PrintPageEventArgs e)
+        {
+            Font font = new Font("Arial", 10);
+            Brush brush = Brushes.Black;
+            float x = 50, y = 50;
+            e.Graphics.DrawString(continutDePrintat, font, brush, x, y);
+        }
     }
 }
